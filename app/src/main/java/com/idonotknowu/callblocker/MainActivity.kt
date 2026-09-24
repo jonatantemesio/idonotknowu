@@ -8,8 +8,13 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.ui.Modifier
+import com.idonotknowu.callblocker.ui.AppTheme
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -27,8 +32,10 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         val dao = AppDatabase.get(this).blockedCallDao()
 
+        enableEdgeToEdge()
         setContent {
-            MaterialTheme {
+            AppTheme {
+              Surface(color = MaterialTheme.colorScheme.background, modifier = Modifier.systemBarsPadding()) {
                 var showList by remember { mutableStateOf(false) }
                 var active by remember { mutableStateOf(isActive(this)) }
                 val calls by dao.observeAll().collectAsState(initial = emptyList())
@@ -57,6 +64,7 @@ class MainActivity : ComponentActivity() {
                 } else {
                     HomeScreen(
                         active = active,
+                        blockedCount = calls.size,
                         onToggle = {
                             if (active) {
                                 Prefs.setEnabled(this, false)
@@ -70,6 +78,7 @@ class MainActivity : ComponentActivity() {
                         onShowBlocked = { showList = true },
                     )
                 }
+              }
             }
         }
     }
