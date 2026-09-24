@@ -3,3 +3,13 @@ build/
 local.properties
 .idea/
 *.iml
+.kotlin/
+*.jks
+*.keystore
+keystore.properties
+
+# Local AI tooling (not part of the app)
+.claude/
+.agents/
+CLAUDE.md
+skills-lock.json

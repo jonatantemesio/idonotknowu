@@ -26,9 +26,12 @@ class CallBlockerService : CallScreeningService() {
         val canReadContacts =
             checkSelfPermission(Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED
 
-        // Fail-open: inactive or unable to read contacts -> let the call through.
-        val shouldBlock = Prefs.isEnabled(this) && canReadContacts &&
-            (number == null || !ContactChecker.isInContacts(this, number))
+        val shouldBlock = BlockPolicy.shouldBlock(
+            enabled = Prefs.isEnabled(this),
+            canReadContacts = canReadContacts,
+            number = number,
+            isInContacts = { ContactChecker.isInContacts(this, it) },
+        )
 
         if (!shouldBlock) {
             respondToCall(details, CallResponse.Builder().build())
