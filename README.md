@@ -2,7 +2,9 @@
   <img src="docs/logo.png" alt="IDONOTKNOWU" width="200">
 </p>
 
-# IDONOTKNOWU — Call Blocker
+# IDONOTKNOWU — Bloqueador de ligações desconhecidas para Android
+
+_Call Blocker: bloqueie ligações de números que não estão nos seus contatos, de graça, sem anúncios e sem internet._
 
 App Android que **rejeita em silêncio** as ligações de números que não estão nos seus contatos. Sem notificação, sem entrada no histórico de chamadas. Tudo acontece no aparelho, sem internet.
 
@@ -11,6 +13,10 @@ App Android que **rejeita em silêncio** as ligações de números que não est�
 - Números ocultos também são bloqueados.
 - Se o app estiver desativado ou sem permissão de contatos, a ligação **passa** (nunca bloqueia tudo por engano).
 - Tela "Ver bloqueadas" com o total e cada número que ligou.
+
+## Palavras-chave
+
+bloqueador de chamadas, bloquear ligações de números desconhecidos, bloquear número não salvo, bloquear spam de ligação, bloquear telemarketing, anti-spam de chamadas, rejeitar chamadas automaticamente, call blocker, block unknown callers, block calls not in contacts, call screening, Android 10, Samsung, Kotlin, Jetpack Compose, open source, sem anúncios, privacidade.
 
 ## Instalação
 
