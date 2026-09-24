@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
@@ -26,6 +27,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -111,6 +113,8 @@ fun HomeScreen(
                 modifier = Modifier.fillMaxWidth().heightIn(min = 56.dp),
             ) { Text("Ativar", style = MaterialTheme.typography.titleMedium) }
         }
+        Spacer(Modifier.height(8.dp))
+        DeveloperFooter()
     }
 }
 
@@ -131,6 +135,34 @@ private fun StatusChip(active: Boolean) {
             if (active) "Proteção ativa" else "Proteção desativada",
             style = MaterialTheme.typography.labelLarge,
             color = MaterialTheme.colorScheme.onSurface,
+        )
+    }
+}
+
+private const val DEVELOPER_URL = "https://www.linkedin.com/in/jtemesio"
+
+@Composable
+private fun DeveloperFooter() {
+    val uriHandler = LocalUriHandler.current
+    Row(
+        modifier = Modifier
+            .heightIn(min = 48.dp)
+            .clip(PillShape)
+            .clickable { uriHandler.openUri(DEVELOPER_URL) }
+            .padding(horizontal = 16.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+    ) {
+        Icon(
+            painter = painterResource(R.drawable.ic_code),
+            contentDescription = null,
+            tint = MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier.size(18.dp),
+        )
+        Text(
+            "Desenvolvido por Jonatan Temesio",
+            style = MaterialTheme.typography.labelMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
     }
 }
