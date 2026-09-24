@@ -38,31 +38,6 @@ adb install -r app/build/outputs/apk/debug/app-debug.apk
 
 Os testes cobrem a regra de bloqueio (`BlockPolicy`), a consulta de contatos, as preferências, o banco Room e as duas telas. Ficam sem cobertura o `CallBlockerService` (só a cola com o sistema, a decisão está em `BlockPolicy`) e o `MainActivity`; valide-os no aparelho ligando de um número não salvo e de um contato.
 
-## Assinatura do APK release
-
-O APK de debug não serve para distribuição. Gere uma chave **uma única vez** e guarde-a com backup: sem ela você não consegue publicar atualizações do mesmo app.
-
-```bash
-keytool -genkeypair -v -keystore ~/idonotknowu-release.jks \
-  -alias idonotknowu -keyalg RSA -keysize 4096 -validity 10000
-```
-
-Crie o `keystore.properties` na raiz a partir do modelo (o arquivo e o `.jks` são ignorados pelo git):
-
-```bash
-cp keystore.properties.example keystore.properties   # edite storeFile e as senhas
-```
-
-Gere e confira o APK:
-
-```bash
-./gradlew assembleRelease
-# app/build/outputs/apk/release/app-release.apk
-$ANDROID_HOME/build-tools/<versão>/apksigner verify --print-certs app/build/outputs/apk/release/app-release.apk
-```
-
-Sem o `keystore.properties`, o build de release sai **sem assinatura** e não instala. Para uma nova versão, aumente `versionCode` e `versionName` em `app/build.gradle.kts`. Para a Play Store, use o mesmo esquema com `./gradlew bundleRelease` (AAB) e ative o Play App Signing.
-
 ## Política de privacidade
 
 _Última atualização: 24/09/2026_
@@ -84,7 +59,7 @@ O IDONOTKNOWU respeita sua privacidade. Este aplicativo **não coleta, não envi
 
 **Alterações:** mudanças nesta política serão publicadas neste arquivo, com a data atualizada.
 
-**Contato:** [SEU E-MAIL DE CONTATO]
+**Contato:** jonatan.t.andrade@gmail.com
 
 ## Apoie o projeto ☕
 
