@@ -42,4 +42,9 @@ class HomeScreenTest {
         assertEquals(1, toggles)
         assertEquals(1, opened)
     }
+
+    @Test fun showsDeveloperFooter() {
+        rule.setContent { AppTheme { HomeScreen(false, 0, {}, {}) } }
+        rule.onNodeWithText("Desenvolvido por Jonatan Temesio").assertIsDisplayed()
+    }
 }
